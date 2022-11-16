@@ -13,6 +13,23 @@
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+
+		<style>
+			.gameWrapper {
+				position: relative;
+				padding-bottom: 56.25%;
+				padding-top: 25px;
+				height: 0;
+				max-width: 60%;
+			}
+			.gameWrapper iframe {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+			}
+		</style>
 	</head>
 	<body>
 		<!-- Header -->
@@ -49,7 +66,8 @@
 								<li><a href="#results" id="results-link" class="skel-layers-ignoreHref"><span class="icon fa-th">Results</span></a></li>
 								<li><a href="#references" id="references-link" class="skel-layers-ignoreHref"><span class="icon fa-th">References</span></a></li>
 								<li><a href="#team" id="team-link" class="skel-layers-ignoreHref"><span class="icon fa-user">Our Team</span></a></li>
-								<li><a href="#contact" id="contact-link" class="skel-layers-ignoreHref"><span class="icon fa-envelope">Contact</span></a></li>
+								<!--<li><a href="#contact" id="contact-link" class="skel-layers-ignoreHref"><span class="icon fa-envelope">Contact</span></a></li>-->
+								<li><a href="#games" id="game-link" class="skel-layers-ignoreHref"><span class="icon fa-th">Games</span></a></li>
 							</ul>
 						</nav>
 				</div>
@@ -138,6 +156,7 @@
 						</div>
 					</section>
 
+
 				<!-- About Me -->
 					<section id="team" class="two">
 						<div class="container">
@@ -176,6 +195,16 @@
 							</div>
 
 						</div>
+					</section>
+
+					<section id="games" class="three">
+						<div class="container">
+							<header>
+								<h2>Games</h2>
+							</header>
+							<div class="gameWrapper">
+								<iframe src="https://previews.customer.envatousercontent.com/files/284246327/index.html" allowfullscreen></iframe>
+							</div>						</div>
 					</section>
 
 				<!-- Contact -->
