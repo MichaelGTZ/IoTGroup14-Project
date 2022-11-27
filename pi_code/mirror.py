@@ -3,6 +3,8 @@ import weather_request
 # Import and initialize the pygame library
 import pygame
 from pygame import display
+import cv2
+
 pygame.init()
 pygame.font.init()
 
@@ -11,13 +13,14 @@ blue = (0, 0, 128)
 # Set up the drawing window
 screen= display.set_mode(flags=pygame.RESIZABLE)
 
-# create a font object.
-# 1st parameter is the font file
-# which is present in pygame.
-# 2nd parameter is size of the font
-
 
 font = pygame.font.SysFont('Arial', 72)
+
+# set up camera\
+cap = cv2.VideoCapture(0)
+_, frame = cap.read()
+
+cv2.imwrite("pic.jpg", frame)
 
 while True:
     time_req = str(time_display.get_datetime())
