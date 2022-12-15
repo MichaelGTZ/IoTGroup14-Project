@@ -45,7 +45,7 @@ description, temp, feels_like, low, high, wind = weather_request.get_weather()
 
 scope = "user-library-read,user-read-playback-position,app-remote-control,user-read-playback-state,user-read-currently-playing"
 
-# sp = spotipy.Spotify(auth_manager=SpotifyOAuth(scope=scope))
+sp = spotipy.Spotify(auth_manager=SpotifyOAuth(scope=scope))
 
 img_url = ""
 outfit_msg = ""
@@ -63,27 +63,32 @@ while True:
     time_obj = font.render(time_str, True, white)
     day = font2.render(day, True, white)
 
-    # spotify code
-    # if count % 10 == 0:
-    #     current_song = sp.current_user_playing_track()
-    #     track_name = current_song['item']['name']
-    #     artist = current_song['item']['album']['artists'][0]['name']
-    #     img_url = current_song['item']['album']['images'][0]['url']
-    
-    # if len(img_url) > 0:
-    #     image_str = urlopen(img_url).read()
-    #     # create a file object (stream)
-    #     image_file = io.BytesIO(image_str)
-    #     image = pygame.image.load(image_file)
-    #     image = pygame.transform.scale(image, (256, 256))
-    #     now_playing = font4.render("Now Playing", True, white)
-    #     art = font5.render(artist, True, white)
-    #     track = font5.render(track_name, True, white)
+    ## spotify code
+    if count % 10 == 0:
+        current_song = sp.current_user_playing_track()
+        # print(current_song)
+        if current_song:
+            if current_song['is_playing']:
+                track_name = current_song['item']['name']
+                artist = current_song['item']['album']['artists'][0]['name']
+                img_url = current_song['item']['album']['images'][0]['url']
+            else:
+                img_url = ""
 
-    #     screen.blit(image, (0, 1600))
-    #     screen.blit(now_playing, (270, 1600))
-    #     screen.blit(track, (270, 1660))
-    #     screen.blit(art, (270, 1700))
+    if len(img_url) > 0:
+        image_str = urlopen(img_url).read()
+        # create a file object (stream)
+        image_file = io.BytesIO(image_str)
+        image = pygame.image.load(image_file)
+        image = pygame.transform.scale(image, (256, 256))
+        now_playing = font4.render("Now Playing", True, white)
+        art = font5.render(artist, True, white)
+        track = font5.render(track_name, True, white)
+
+        screen.blit(image, (0, 1600))
+        screen.blit(now_playing, (270, 1600))
+        screen.blit(track, (270, 1660))
+        screen.blit(art, (270, 1700))
     
     if count % 300 == 0:
         description, temp, feels_like, low, high, wind = weather_request.get_weather()
@@ -98,7 +103,7 @@ while True:
         cam = cv2.VideoCapture(0)
         _, frame = cam.read()
         cv2.imwrite("pic.jpg", frame)
-        url = 'https://ab5b-104-198-141-206.ngrok.io/im_size'
+        url = 'https://5310-34-86-196-125.ngrok.io/im_size'
         my_img = {'image': open('pic.jpg', 'rb')}
         r = requests.post(url, files=my_img)
 
@@ -107,10 +112,10 @@ while True:
 
         if int(temp) < 60 and r_dict['label'][0] != 'outerwear':
             outfit_msg = "Nice " + r_dict['label'][0] + "." 
-            weather_rec = "It's cold outside you should wear a jacket!"
+            weather_rec = "It's cold outside, wear a jacket!"
         elif int(temp) > 75 and r_dict['label'][0] == 'outerwear':
             outfit_msg = "Nice " + r_dict['label'][0] + "."
-            weather_rec = "It's hot outside you should wear a t-shirt!"
+            weather_rec = "It's hot outside, wear a t-shirt!"
         else:
             outfit_msg = "Nice " + r_dict['label'][0] + "."
             weather_rec = "That's perfect for the weather!"
@@ -127,9 +132,9 @@ while True:
     selfie = pygame.transform.scale(selfie, (320, 180))
     screen.blit(selfie, (0, 1200))
 
-    model_rec1 = font6.render(outfit_msg, True, white)
-    model_rec2 = font6.render(weather_rec, True, white)
-    model_rec3 = font6.render(use_umbrella, True, white)
+    model_rec1 = font4.render(outfit_msg, True, white)
+    model_rec2 = font4.render(weather_rec, True, white)
+    model_rec3 = font4.render(use_umbrella, True, white)
     screen.blit(model_rec1, (324,1200))
     screen.blit(model_rec2, (324,1255))
     screen.blit(model_rec3, (324,1310))
